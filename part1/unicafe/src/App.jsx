@@ -14,26 +14,16 @@ const ListUsed = (props) => (
   </div>
 )
 
-const Total = (props) => {
+const Statictics = (props) => {
   const total = props.good+props.neutral+props.bad
-  return(
-    <p>All {total}</p>
-  )
-
-}
-
-const Average = (props) => {
   const average = (props.good+props.bad)/(props.good+props.neutral+props.bad)
-  return(
-    <p>All {average}</p>
-  )
-
-}
-
-const Positive = (props) => {
   const positive = props.good/(props.good+props.neutral+props.bad)*100
   return(
-    <p>Positive {positive}</p>
+    <div>
+      <p>All {total}</p>
+      <p>All {average}</p>
+      <p>Positive {positive}</p>
+    </div>
   )
 
 }
@@ -54,9 +44,8 @@ const App = () => {
       <ListUsed name={'good'} timesUsed={good}></ListUsed>
       <ListUsed name={'neutral'} timesUsed={neutral}></ListUsed>
       <ListUsed name={'bad'} timesUsed={bad}></ListUsed>
-      <Total good={good} neutral={neutral} bad={bad}></Total>
-      <Average good={good} neutral={neutral} bad={bad}></Average>
-      <Positive good={good} neutral={neutral} bad={bad}></Positive>
+      <Statictics good={good} neutral={neutral} bad={bad}></Statictics>
+
     </div>
   )
 }
