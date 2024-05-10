@@ -18,10 +18,17 @@ const Statictics = (props) => {
   const total = props.good+props.neutral+props.bad
   const average = (props.good+props.bad)/(props.good+props.neutral+props.bad)
   const positive = props.good/(props.good+props.neutral+props.bad)*100
+  if (total === 0) {
+    return (
+      <div>
+        No feedback given
+      </div>
+    )
+  }
   return(
     <div>
       <p>All {total}</p>
-      <p>All {average}</p>
+      <p>Average {average}</p>
       <p>Positive {positive}</p>
     </div>
   )
