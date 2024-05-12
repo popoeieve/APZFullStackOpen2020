@@ -9,7 +9,19 @@ const Anecdotes =(prop) =>
     return(   
       <div>
         <button onClick={prop.handleClick}>
-          Generar
+          Next anecdote
+        </button>
+      </div>
+      
+    )
+  }
+
+const VoteBtn =(prop) =>
+  {
+    return(   
+      <div>
+        <button onClick={prop.handleClick}>
+          Vote
         </button>
       </div>
       
@@ -29,11 +41,33 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
+  const [points, setPoints] = useState({});
+
+  const vote = (index) => {
+    const copy = { ...points };
+
+    copy[index] = (copy[index] || 0) + 1;
+
+    setPoints(copy);
+    console.log(points);
+  };
 
   return (
     <div>
-      <h1>{anecdotes[selected]}</h1>
-      <Anecdotes handleClick={()=>setSelected(getRandomInt(anecdotes.length))}/>
+      <p>{anecdotes[selected]}</p>
+      <p>has {points[selected]||0} votes</p>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <VoteBtn handleClick={()=>vote(selected)}/>            
+            </td>
+            <td>
+              <Anecdotes handleClick={()=>setSelected(getRandomInt(anecdotes.length))}/>
+            </td>  
+          </tr>        
+        </tbody>
+      </table>
     </div>
   )
 }
