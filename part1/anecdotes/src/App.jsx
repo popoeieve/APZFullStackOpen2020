@@ -44,16 +44,27 @@ const App = () => {
   const [points, setPoints] = useState({});
 
   const vote = (index) => {
-    const copy = { ...points };
+    const copy = { ...points }
 
-    copy[index] = (copy[index] || 0) + 1;
+    copy[index] = (copy[index] || 0) + 1
 
     setPoints(copy);
     console.log(points);
   };
 
+  const MostVoted = () => {
+    let maxIndex = 0
+    for (let i = 0; i < anecdotes.length; i++) {
+      if (points[i] > points[maxIndex] || points[maxIndex] === undefined) {
+        maxIndex = i
+      }
+    }
+    return maxIndex
+  }
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>has {points[selected]||0} votes</p>
       <table>
@@ -68,6 +79,8 @@ const App = () => {
           </tr>        
         </tbody>
       </table>
+      <h1>Anecdote with more votes</h1>
+      <p>{anecdotes[MostVoted()]}</p>
     </div>
   )
 }
