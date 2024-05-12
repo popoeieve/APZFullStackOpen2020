@@ -17,15 +17,15 @@ const ListUsed = (props) => (
 const StatisticLine = ({ text, value }) => {
   if(text==="Total"||text==="Average"||text==="Positive"){
       return (
-      <div>
-        {text} {value}
-      </div>
+      <tr>
+        <td>{text}</td><td> {value}</td>
+      </tr>
     );
   }else{
     return (
-      <div>
-        {text} {value}
-      </div>
+      <tr>
+        <td>{text}</td><td> {value}</td>
+      </tr>
     );
   }
 }
@@ -40,14 +40,16 @@ const Statictics = ({ good, neutral, bad }) => {
   }
 
   return (
-    <div>
+    <table>
+      <tbody>
       <StatisticLine text="good" value ={good} />
       <StatisticLine text="neutral" value ={neutral} />
       <StatisticLine text="bad" value ={bad} />
       <StatisticLine text="Total" value={total} />
       <StatisticLine text="Average" value={average} />
       <StatisticLine text="Positive" value={positive} />
-    </div>
+      </tbody>
+    </table>
   );
 }
 
