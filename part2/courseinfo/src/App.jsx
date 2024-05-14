@@ -7,18 +7,16 @@ const Part = ({ part }) =>
     {part.name} {part.exercises}
   </p>
 
-const Content = ({ parts }) => 
-  <>
-    <Part
-      part={parts[0]}
-    />
-    <Part
-      part={parts[1]}
-    />
-    <Part
-      part={parts[2]}
-    />      
-  </>
+const Content = ({ parts }) => {
+  var partList = parts.map((part, index) => (
+    <Part key={index} part={part}></Part>
+  ));
+  return (
+    <div>
+      {partList}
+    </div>
+  );
+}
 
 const Course=({course,parts})=>{
   return(
@@ -43,6 +41,14 @@ const App = () => {
     {
       name: 'State of a component',
       exercises: 14
+    },
+    {
+      name: 'Extra',
+      exercises: 12
+    },
+    {
+      name: 'Test',
+      exercises: 15
     }
   ]
 
