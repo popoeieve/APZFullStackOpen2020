@@ -8,12 +8,14 @@ const Part = ({ part }) =>
   </p>
 
 const Content = ({ parts }) => {
+  var totalAmount=parts.reduce((sum,part)=>sum+part.exercises,0)
   var partList = parts.map((part, index) => (
     <Part key={index} part={part}></Part>
   ));
   return (
     <div>
       {partList}
+      <p>Total of {totalAmount} exercises</p>
     </div>
   );
 }
