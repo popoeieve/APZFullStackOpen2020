@@ -13,13 +13,18 @@ const App = () => {
   const [newName, setNewName] = useState('')
 
   const addName = (event) => {
+    const isNameDuplicate = persons.some(person => person.content === newName);
     event.preventDefault()
-    const namePerson = {
-      content: newName,
-      id: persons.length + 1,
-    };
-    setPersons([...persons, namePerson])
-    setNewName('')
+    if(isNameDuplicate){
+      alert(newName+' is already added to the phonebook')             
+    }else{
+      const namePerson = {
+        content: newName,
+        id: persons.length + 1,
+      };
+      setPersons([...persons, namePerson])
+      setNewName('')
+    }
   }
 
   const handleNameChange = (event) => {
