@@ -1,4 +1,5 @@
 import React from 'react';
+import personService from './personService';
 
 const Name = ({ id, name, number }) => {
     return (
@@ -8,15 +9,20 @@ const Name = ({ id, name, number }) => {
     );
   }
 
-const ContactList = ({ persons }) => {
-  persons.forEach(person => {
-    console.log(person.name); // Log each name
-  });
+const ContactList = ({ persons, setPersons }) => {
+  const handleDeleteClick = (id) => {
+    console.log(`Delete button clicked for id: ${id}`);
+    personService.remove(id);
+    setPersons(persons.filter(person => person.id !== id));
+  };
   return (
     <ul>
-      {persons.map(person =>
-        <Name key={person.id} name={person.name} number={person.number} />
-      )}
+      {persons.map(person => (
+        <li key={person.id} style={{ display: 'flex', alignItems: 'center' }}>
+          <Name name={person.name} number={person.number} />
+          <button style={{ marginLeft: '10px' }} onClick={() => handleDeleteClick(person.id)}>delete</button>
+        </li>
+      ))}
     </ul>
   );
 }

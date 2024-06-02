@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FilterForm from './FilterForm';
 import AddContactForm from './AddContactForm';
 import ContactList from './ContactList';
-import personService from './personService';  // Importa el servicio
+import personService from './personService';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -29,10 +29,10 @@ const App = () => {
     if (isNameDuplicate) {
       alert(`${newName} is already added to the phonebook`);
     } else {
-      const personData = {
+      const personData = {        
         name: newName,
         number: newNumber,
-        id: persons.length + 1,
+        id: (persons.length + 1).toString(),        
       };
       personService
         .create(personData)
@@ -70,7 +70,7 @@ const App = () => {
         handleNameChange={handleNameChange} handleNumberChange={handleNumberChange}
         handleSubmit={addName} />
       <h2>Numbers</h2>
-      <ContactList persons={(newSearch.length > 0 ? filteredList : persons)} />
+      <ContactList persons={(newSearch.length > 0 ? filteredList : persons)} setPersons={setPersons} />
     </div>
   );
 }
