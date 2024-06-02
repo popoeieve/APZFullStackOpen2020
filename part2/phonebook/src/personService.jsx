@@ -12,4 +12,8 @@ const remove = id => {
   return axios.delete(`${'http://localhost:3001/persons'}/${id}`).then(response => response.data);
 };
 
-export default { getAll, create, remove };
+const update = (id, newObject) => {
+  return axios.put(`${'http://localhost:3001/persons'}/${id}`, newObject).then(response => response.data);
+};
+
+export default { getAll, create, remove, update };

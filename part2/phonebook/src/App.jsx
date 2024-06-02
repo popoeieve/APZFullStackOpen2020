@@ -25,15 +25,34 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault();
-    const isNameDuplicate = persons.some(person => person.name === newName);
+    const isNameDuplicate = persons.find(person => person.name === newName);
+
     if (isNameDuplicate) {
-      alert(`${newName} is already added to the phonebook`);
+      if (window.confirm(`${newName} is already added to the phonebook, replace the old number with the new one?`)) {
+        const updatedPerson = { ...isNameDuplicate, number: newNumber };
+
+        console.log('Existing person:', isNameDuplicate);
+        console.log('Updated person:', updatedPerson);
+
+        personService
+          .update(isNameDuplicate.id, updatedPerson)
+          .then(returnedPerson => {
+            setPersons(persons.map(person => person.id !== isNameDuplicate.id ? person : returnedPerson));
+            setNewName('');
+            setNewNumber('');
+            setNewSearch('');
+          })
+          .catch(error => {
+            console.error(`Failed to update person with id ${isNameDuplicate.id}:`, error);
+          });
+      }
     } else {
-      const personData = {        
+      const personData = {
         name: newName,
         number: newNumber,
-        id: (persons.length + 1).toString(),        
+        id: (persons.length + 1).toString(),
       };
+
       personService
         .create(personData)
         .then(returnedPerson => {
